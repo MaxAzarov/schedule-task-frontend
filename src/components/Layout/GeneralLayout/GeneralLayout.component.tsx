@@ -3,10 +3,5 @@ interface GeneralLayoutProps {
 }
 
 export function GeneralLayout({ children }: GeneralLayoutProps) {
-  return (
-    <div>
-      GeneralLayout.component
-      {children}
-    </div>
-  );
+  return <>{children}</>;
 }

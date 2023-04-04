@@ -5,10 +5,9 @@ import { createTheme } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = createTheme();
+const queryClient = new QueryClient();
 
 function App() {
-  const queryClient = new QueryClient();
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>

@@ -1,5 +1,6 @@
-import React from "react";
+import { BigCalendar } from "src/components/BigCalendar";
+import "react-big-calendar/lib/sass/styles.scss";
 
 export function DashboardScreen() {
-  return <div>DashboardScreen.component</div>;
+  return <BigCalendar />;
 }
