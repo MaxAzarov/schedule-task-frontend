@@ -1,5 +1,3 @@
-import { Outlet } from "react-router-dom";
-
 interface GeneralLayoutProps {
   children: React.ReactNode;
 }
