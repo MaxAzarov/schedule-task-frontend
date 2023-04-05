@@ -1,11 +1,13 @@
 import { Button, ButtonProps } from "@mui/material";
 
-interface ConnectButtonProps extends ButtonProps {}
+interface ConnectButtonProps extends ButtonProps {
+  text: string;
+}
 
-export function ConnectButton({ ...props }: ConnectButtonProps) {
+export function ConnectButton({ text, ...props }: ConnectButtonProps) {
   return (
-    <Button variant="contained" {...props}>
-      Connect
+    <Button variant="contained" {...props} fullWidth>
+      {text}
     </Button>
   );
 }
