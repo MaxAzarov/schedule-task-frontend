@@ -46,7 +46,8 @@ export default function LoginScreen() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+
+        <form onSubmit={form.handleSubmit}>
           <TextField
             margin="normal"
             required
@@ -94,7 +95,7 @@ export default function LoginScreen() {
               </Link>
             </Grid>
           </Grid>
-        </Box>
+        </form>
       </Box>
     </Container>
   );

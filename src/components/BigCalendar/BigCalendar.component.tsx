@@ -1,6 +1,7 @@
 import {
   Calendar,
   CalendarProps,
+  Formats,
   Views,
   dateFnsLocalizer,
 } from "react-big-calendar";
@@ -10,17 +11,17 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import enUS from "date-fns/locale/en-US";
 
-const locales = {
-  "en-US": enUS,
-};
-
 const localizer = dateFnsLocalizer({
   format,
   parse,
   startOfWeek,
   getDay,
-  locales,
+  locales: { "en-US": enUS },
 });
+
+const formats: Formats = {
+  timeGutterFormat: (date) => format(date, "HH:mm", { locale: enUS }),
+};
 
 export function BigCalendar({ ...props }: Omit<CalendarProps, "localizer">) {
   return (
@@ -32,6 +33,7 @@ export function BigCalendar({ ...props }: Omit<CalendarProps, "localizer">) {
       views={["day", "agenda", "week"]}
       {...props}
       localizer={localizer}
+      formats={formats}
     />
   );
 }

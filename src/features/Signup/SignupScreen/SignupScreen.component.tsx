@@ -13,15 +13,27 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useFormik } from "formik";
 import signupSchema from "./Signup.schema";
 import { ROUTES } from "src/routing/routes";
+import { useCreateUser } from "src/hooks/users/useCreateUser";
 
 export function SignupScreen() {
+  const { mutate: createUser } = useCreateUser();
   const form = useFormik({
     validationSchema: signupSchema,
     initialValues: {
       email: "",
       password: "",
+      firstName: "",
+      lastName: "",
     },
-    onSubmit: async (form) => {},
+    onSubmit: async (form) => {
+      await createUser({
+        email: form.email,
+        firstName: form.firstName,
+        lastName: form.lastName,
+        password: form.password,
+        phone: "",
+      });
+    },
   });
 
   return (
@@ -41,7 +53,8 @@ export function SignupScreen() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 3 }}>
+
+        <form onSubmit={form.handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -52,6 +65,8 @@ export function SignupScreen() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                onChange={form.handleChange}
+                error={!!form.errors.firstName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -62,6 +77,8 @@ export function SignupScreen() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="family-name"
+                onChange={form.handleChange}
+                error={!!form.errors.firstName}
               />
             </Grid>
             <Grid item xs={12}>
@@ -72,6 +89,7 @@ export function SignupScreen() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={form.handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -83,6 +101,7 @@ export function SignupScreen() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                onChange={form.handleChange}
               />
             </Grid>
           </Grid>
@@ -91,7 +110,7 @@ export function SignupScreen() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={form.submitForm}
+            disabled={form.isSubmitting}
           >
             Sign Up
           </Button>
@@ -102,7 +121,7 @@ export function SignupScreen() {
               </Link>
             </Grid>
           </Grid>
-        </Box>
+        </form>
       </Box>
     </Container>
   );
