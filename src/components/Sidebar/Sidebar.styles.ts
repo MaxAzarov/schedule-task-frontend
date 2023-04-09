@@ -52,7 +52,7 @@ export const NavIconItem = styled(NavLink)`
   color: ${(props) => props.theme.palette.common.white};
 
   &.active {
-    color: #48b6f3;
+    color: black;
 
     &:after {
       display: block;
@@ -61,7 +61,7 @@ export const NavIconItem = styled(NavLink)`
 
   &:hover,
   &.hover {
-    color: #48b6f3;
+    color: lighten(black, 10%);
   }
 
   &:after {

@@ -1,4 +1,4 @@
-import { createUserApi } from "./login.api";
+import { createUserApi } from "./createUser.api";
 import { CreateUserRequest, CreateUserResponse } from "./apiTypes";
 import { mapRequest, mapResponse } from "./mappers";
 import { GetApiFunc } from "../../base";

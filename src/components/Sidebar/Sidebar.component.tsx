@@ -9,7 +9,7 @@ import {
   NavigationIconsPanel,
 } from "./Sidebar.styles";
 import { ROUTES } from "src/routing/routes";
-import { HomeIcon, IconProps } from "../Icons";
+import { HomeIcon, IconProps, SettingsIcon } from "../Icons";
 
 interface SidebarItem {
   route: string;
@@ -24,6 +24,13 @@ const items: SidebarItem[] = [
     route: ROUTES.dashboard,
     icon: HomeIcon,
     label: "Dashboard",
+    labelRef: React.createRef(),
+    iconRef: React.createRef(),
+  },
+  {
+    route: ROUTES.profile,
+    icon: SettingsIcon,
+    label: "Profile",
     labelRef: React.createRef(),
     iconRef: React.createRef(),
   },
