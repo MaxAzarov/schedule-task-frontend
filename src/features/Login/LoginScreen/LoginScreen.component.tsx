@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useFormik } from "formik";
 import loginSchema from "./Login.schema";
 import { useLogin } from "src/hooks/auth/useLogin";
+import { ROUTES } from "src/routing/routes";
 
 export default function LoginScreen() {
   const { mutate: login } = useLogin();
@@ -30,7 +31,7 @@ export default function LoginScreen() {
   });
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ height: "100vh" }}>
       <CssBaseline />
       <Box
         sx={{
@@ -90,7 +91,7 @@ export default function LoginScreen() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href={ROUTES.signup} variant="body2">
                 Don't have an account? Sign Up
               </Link>
             </Grid>

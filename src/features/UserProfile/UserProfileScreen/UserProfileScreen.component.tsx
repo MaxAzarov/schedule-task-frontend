@@ -1,8 +1,6 @@
 import { useFormik } from "formik";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import { ConnectButton } from "src/components/buttons";
-import { Config } from "src/config";
 import { Header, Section } from "./UserProfileScreen.styles";
 import { useCurrentUser } from "src/hooks/auth/useCurrentUser";
 import { UserProfileForm } from "../UserProfile.types";
@@ -10,10 +8,56 @@ import FormikTextField from "src/components/formik/FormikTextField/FormikTextFie
 import userProfileSchema from "./UserProfileScreen.schema";
 import { useUpdateUser } from "src/hooks/users/useUpdateUser";
 import { UpdateUserRequest } from "src/api/users/updateUser/apiTypes";
+import { useSignout } from "src/hooks/auth/useSignout";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useCreateIntegration } from "src/hooks/integrations/useCreateIntegration";
+import { IntegrationType } from "src/api/commonTypes";
+import { ROUTES } from "src/routing/routes";
+import IntegrationsButtons from "./IntegrationsButtons/IntegrationsButtons.component";
 
 export function UserProfileScreen() {
   const { currentUser, isLoading } = useCurrentUser();
   const { mutate: updateUser } = useUpdateUser();
+  const { mutate: createIntegration } = useCreateIntegration();
+  const { signout } = useSignout();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const type = searchParams.get("type");
+  const accessToken = searchParams.get("accessToken");
+  const refreshToken = searchParams.get("refreshToken");
+
+  const createUserIntegration = useCallback(
+    async (
+      type: IntegrationType,
+      accessToken: string,
+      refreshToken: string
+    ) => {
+      await createIntegration({
+        type,
+        accessToken,
+        refreshToken,
+      });
+    },
+    [createIntegration]
+  );
+
+  useEffect(() => {
+    // TODO: find other way to create integration
+
+    async function create() {
+      if (type && accessToken && refreshToken) {
+        await createUserIntegration(
+          type as IntegrationType,
+          accessToken as string,
+          refreshToken as string
+        );
+
+        navigate(ROUTES.profile);
+      }
+    }
+    create();
+  }, [accessToken, createUserIntegration, navigate, refreshToken, type]);
 
   const form = useFormik<UserProfileForm>({
     validationSchema: userProfileSchema,
@@ -36,20 +80,16 @@ export function UserProfileScreen() {
     },
   });
 
-  const handleConnectJira = useCallback(() => {
-    window.location.href = `${Config.API_BASE_URL}/jira/auth`;
-  }, []);
-
-  const handleConnectTrello = useCallback(() => {
-    window.location.href = `${Config.API_BASE_URL}/trello/auth`;
-  }, []);
+  const handleSignout = useCallback(() => {
+    signout();
+  }, [signout]);
 
   if (isLoading) {
     return <>Loading...</>;
   }
 
   return (
-    <Container>
+    <Container sx={{ minHeight: "100vh" }}>
       <Header>
         <Typography component="h1" variant="h5">
           Profile & Settings
@@ -109,6 +149,7 @@ export function UserProfileScreen() {
             <FormikTextField
               name="oldPassword"
               label="Old Password"
+              title="Old Password"
               form={form}
               required
               fullWidth
@@ -127,23 +168,16 @@ export function UserProfileScreen() {
       <Section>
         <Typography>Integrations</Typography>
 
-        <Box>
-          <ConnectButton
-            onClick={handleConnectJira}
-            text="Connect Jira account"
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            size="large"
-          />
-          <ConnectButton
-            onClick={handleConnectTrello}
-            text="Connect Trello account"
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            size="large"
-          />
-        </Box>
+        <IntegrationsButtons />
       </Section>
+
+      <Button
+        onClick={handleSignout}
+        variant="contained"
+        sx={{ marginLeft: "auto", display: "flex", my: "20px" }}
+      >
+        Sign out
+      </Button>
     </Container>
   );
 }

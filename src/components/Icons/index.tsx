@@ -40,3 +40,19 @@ export function SettingsIcon(props: IconProps) {
     </SvgIcon>
   );
 }
+
+export function CheckGreenCircleIcon(props: IconProps) {
+  return (
+    <SvgIcon width="18" height="18" viewBox="0 0 18 18" fill="none" {...props}>
+      <circle cx="9" cy="9" r="9" fill="#57A849" />
+      <path
+        d="M6 9.37311L8.374 11.7461L12.5 7.62012"
+        stroke="white"
+        fill="none"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </SvgIcon>
+  );
+}
