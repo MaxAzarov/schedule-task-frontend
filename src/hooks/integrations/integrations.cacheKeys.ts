@@ -1,6 +1,6 @@
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 
 export const cacheKeys = {
-  getIntegration: (type: IntegrationType) => ["getIntegration", type],
+  getIntegration: (type: EventType) => ["getIntegration", type],
   getEvents: () => ["getEvents"],
 };

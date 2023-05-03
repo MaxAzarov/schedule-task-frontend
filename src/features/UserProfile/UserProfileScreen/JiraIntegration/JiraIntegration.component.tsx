@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 import { CheckGreenCircleIcon } from "src/components/Icons";
 import { ConnectButton } from "src/components/buttons";
 import JiraBoardSelect from "src/components/inputs/JiraBoardSelect/JiraBoardSelect.component";
@@ -14,7 +14,7 @@ import ColumnSelect from "src/components/inputs/ColumnSelect/ColumnSelect.compon
 
 export default function JiraIntegration() {
   const { integration: jiraIntegration } = useSingleIntegration({
-    type: IntegrationType.jira,
+    type: EventType.jira,
   });
 
   const { mutate: deleteIntegration, isLoading } = useDeleteIntegration();
@@ -35,7 +35,7 @@ export default function JiraIntegration() {
   }, []);
 
   const handleDisconnectClick = useCallback(
-    (id: number, type: IntegrationType) => {
+    (id: number, type: EventType) => {
       deleteIntegration({ id, type });
     },
     [deleteIntegration]
@@ -46,7 +46,7 @@ export default function JiraIntegration() {
       updateIntegration({
         id: jiraIntegration?.id!,
         projectId: event.target.value,
-        type: IntegrationType.jira,
+        type: EventType.jira,
       });
     },
     [jiraIntegration?.id, updateIntegration]
@@ -57,7 +57,7 @@ export default function JiraIntegration() {
       const name = event.target.name as "readyColumnId" | "todoColumnId";
       updateIntegration({
         id: jiraIntegration?.id!,
-        type: IntegrationType.jira,
+        type: EventType.jira,
         [name]: event.target.value,
       });
     },

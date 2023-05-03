@@ -214,7 +214,6 @@ export const theme = createTheme({
             color: "white",
           },
         },
-        // sizeSmall: {},
         sizeMedium: {
           borderRadius: "10px",
         },

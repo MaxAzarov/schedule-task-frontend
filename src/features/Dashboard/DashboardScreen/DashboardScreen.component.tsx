@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { Event } from "react-big-calendar";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { BigCalendar } from "src/components/BigCalendar";
 import { useIntegrationsEvents } from "src/hooks/integrations/useIntegrationsEvents";
@@ -8,12 +8,13 @@ import { useMarkEventAsDone } from "src/hooks/integrations/useMarkEventAsDone";
 import { DialogStyled, MarkDoneButton } from "./DashboardScreen.styles";
 import { CheckGreenCircleIcon } from "src/components/Icons";
 import "react-big-calendar/lib/sass/styles.scss";
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
+import { useCreateEvent } from "src/hooks/events/useCreateEvent";
 
 function getEventDescription(event: Event): string {
-  if (event.resource.type === IntegrationType.jira) {
+  if (event.resource.type === EventType.jira) {
     return event.resource.description.content?.[0]?.content?.[0]?.text ?? "";
-  } else if (event.resource.type === IntegrationType.trello) {
+  } else if (event.resource.type === EventType.trello) {
     return event.resource.desc;
   }
 
@@ -24,6 +25,9 @@ export function DashboardScreen() {
   const { events } = useIntegrationsEvents({});
   const { mutate: markEventAsDone } = useMarkEventAsDone();
   const [selectedEvent, setSelectedEvent] = useState<Event | null>();
+  const [newEvent, setNewEvent] = useState<Event>({});
+  const { mutate: createEvent } = useCreateEvent();
+  const [isOpenCreateModal, setIsOpenCreateModal] = useState<boolean>(false);
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
@@ -44,7 +48,27 @@ export function DashboardScreen() {
     return "";
   }, [selectedEvent]);
 
-  const handleSelectSlot = () => {};
+  const handleSelectSlot = (event: Event) => {
+    setNewEvent({
+      end: event.end,
+      start: event.start,
+    });
+
+    setIsOpenCreateModal(true);
+  };
+
+  const handleCreateEvent = () => {
+    createEvent({
+      end: newEvent.end?.toJSON()!,
+      start: newEvent.start?.toJSON()!,
+      title: newEvent.title as string,
+      resource: {
+        type: EventType.custom,
+      },
+    });
+
+    setIsOpenCreateModal(false);
+  };
 
   return (
     <Box
@@ -98,6 +122,38 @@ export function DashboardScreen() {
           </Box>
         </DialogStyled>
       )}
+
+      <DialogStyled
+        open={isOpenCreateModal}
+        onClose={() => setIsOpenCreateModal(false)}
+      >
+        <Box sx={{ padding: "20px" }}>
+          <p>Create Event</p>
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Event name"
+            autoFocus
+            onChange={(e) => {
+              setNewEvent((prev) => ({
+                ...prev,
+                title: e.target.value,
+              }));
+            }}
+          />
+
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleCreateEvent}
+          >
+            Create
+          </Button>
+        </Box>
+      </DialogStyled>
     </Box>
   );
 }

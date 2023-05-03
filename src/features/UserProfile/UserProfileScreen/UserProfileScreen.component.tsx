@@ -11,7 +11,7 @@ import { UpdateUserRequest } from "src/api/users/updateUser/apiTypes";
 import { useSignout } from "src/hooks/auth/useSignout";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCreateIntegration } from "src/hooks/integrations/useCreateIntegration";
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 import { ROUTES } from "src/routing/routes";
 import IntegrationsButtons from "./IntegrationsButtons/IntegrationsButtons.component";
 
@@ -28,11 +28,7 @@ export function UserProfileScreen() {
   const refreshToken = searchParams.get("refreshToken");
 
   const createUserIntegration = useCallback(
-    async (
-      type: IntegrationType,
-      accessToken: string,
-      refreshToken: string
-    ) => {
+    async (type: EventType, accessToken: string, refreshToken: string) => {
       await createIntegration({
         type,
         accessToken,
@@ -48,7 +44,7 @@ export function UserProfileScreen() {
     async function create() {
       if (type && accessToken && refreshToken) {
         await createUserIntegration(
-          type as IntegrationType,
+          type as EventType,
           accessToken as string,
           refreshToken as string
         );

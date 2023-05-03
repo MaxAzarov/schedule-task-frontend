@@ -1,7 +1,7 @@
-import { IntegrationType } from "./integration.types";
+import { EventType } from "./integration.types";
 
 export interface IntegrationApi {
   accessToken: string;
   refreshToken: string;
-  type: IntegrationType;
+  type: EventType;
 }

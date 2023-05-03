@@ -1,9 +1,9 @@
 import { Event } from "react-big-calendar";
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 
 export interface MarkEventAsDoneRequestApi {
   eventId: string;
-  type: IntegrationType;
+  type: EventType;
 }
 
 export interface MarkEventAsDoneResponseApi extends Event {}

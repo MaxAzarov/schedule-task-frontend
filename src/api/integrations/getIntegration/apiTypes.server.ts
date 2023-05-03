@@ -1,7 +1,7 @@
-import { Integration, IntegrationType } from "src/api/commonTypes";
+import { Integration, EventType } from "src/api/commonTypes";
 
 export interface GetIntegrationRequestApi {
-  type: IntegrationType;
+  type: EventType;
 }
 
 export interface GetIntegrationResponseApi extends Integration {}

@@ -1,6 +1,6 @@
 import { useCallback, ChangeEvent } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 import { useSingleIntegration } from "src/hooks/integrations/useSingleIntegration";
 import { useTrelloBoards } from "src/hooks/trelloIntegrations/useTrelloBoards";
 import { CheckGreenCircleIcon } from "src/components/Icons";
@@ -14,7 +14,7 @@ import { useTrelloColumns } from "src/hooks/trelloIntegrations/useTrelloColumns"
 
 export default function TrelloIntegration() {
   const { integration: trelloIntegration } = useSingleIntegration({
-    type: IntegrationType.trello,
+    type: EventType.trello,
   });
 
   const { boards } = useTrelloBoards({}, { enabled: !!trelloIntegration });
@@ -30,7 +30,7 @@ export default function TrelloIntegration() {
   }, []);
 
   const handleDisconnectClick = useCallback(
-    (id: number, type: IntegrationType) => {
+    (id: number, type: EventType) => {
       deleteIntegration({ id, type });
     },
     [deleteIntegration]
@@ -41,7 +41,7 @@ export default function TrelloIntegration() {
       updateIntegration({
         id: trelloIntegration?.id!,
         projectId: event.target.value,
-        type: IntegrationType.trello,
+        type: EventType.trello,
       });
     },
     [trelloIntegration?.id, updateIntegration]
@@ -52,7 +52,7 @@ export default function TrelloIntegration() {
       const name = event.target.name as "readyColumnId" | "todoColumnId";
       updateIntegration({
         id: trelloIntegration?.id!,
-        type: IntegrationType.trello,
+        type: EventType.trello,
         [name]: event.target.value,
       });
     },

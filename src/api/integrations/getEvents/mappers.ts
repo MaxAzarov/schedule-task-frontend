@@ -7,11 +7,8 @@ import {
 export const mapResponse = (
   responseApi: GetUserEventsResponseApi
 ): GetUserEventsResponse => {
-  // return responseApi;
   return responseApi.map((event) => ({
     ...event,
-    // start: new Date(event.start!),
-    // start: new Date(event.start!),
     start: event.start ? new Date(event.start) : undefined,
     end: event.end ? new Date(event.end) : undefined,
   }));

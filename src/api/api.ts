@@ -6,6 +6,7 @@ import { createUsersApi } from "./users/usersApi";
 import { createIntegrationsApi } from "./integrations/integrationsApi";
 import { createTrelloIntegrationApi } from "./trelloIntegration/trelloIntegrationApi";
 import { createJiraIntegrationApi } from "./jiraIntegration/jiraIntegrationApi";
+import { createEventsApi } from "./events/eventsIntegrationApi";
 
 function createApi(getAxiosInstance: GetApiFunc) {
   return {
@@ -14,6 +15,7 @@ function createApi(getAxiosInstance: GetApiFunc) {
     ...createIntegrationsApi(getAxiosInstance),
     ...createTrelloIntegrationApi(getAxiosInstance),
     ...createJiraIntegrationApi(getAxiosInstance),
+    ...createEventsApi(getAxiosInstance),
   };
 }
 

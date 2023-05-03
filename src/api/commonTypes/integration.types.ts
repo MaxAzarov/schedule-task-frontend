@@ -1,6 +1,7 @@
-export enum IntegrationType {
+export enum EventType {
   "jira" = "jira",
   "trello" = "trello",
+  "custom" = "custom",
 }
 
 export interface Integration {
@@ -8,7 +9,7 @@ export interface Integration {
   userId: string;
   accessToken: string;
   refreshToken: string;
-  type: IntegrationType;
+  type: EventType;
   todoColumnId?: string;
   readyColumnId?: string;
   email: string;

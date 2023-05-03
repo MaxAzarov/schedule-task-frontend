@@ -1,9 +1,9 @@
-import { Integration, IntegrationType } from "src/api/commonTypes";
+import { Integration, EventType } from "src/api/commonTypes";
 
 export interface UpdateIntegrationRequestApi {
   id: number;
   projectId?: string;
-  type: IntegrationType;
+  type: EventType;
   todoColumnId?: string;
   readyColumnId?: string;
 }

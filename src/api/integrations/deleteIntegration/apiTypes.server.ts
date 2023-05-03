@@ -1,8 +1,8 @@
-import { IntegrationType } from "src/api/commonTypes";
+import { EventType } from "src/api/commonTypes";
 
 export interface DeleteIntegrationRequestApi {
   id: number;
-  type: IntegrationType;
+  type: EventType;
 }
 
 export interface DeleteIntegrationResponseApi {}
