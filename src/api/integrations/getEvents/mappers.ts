@@ -12,8 +12,8 @@ export const mapResponse = (
     ...event,
     // start: new Date(event.start!),
     // start: new Date(event.start!),
-    start: new Date(),
-    end: new Date(),
+    start: event.start ? new Date(event.start) : undefined,
+    end: event.end ? new Date(event.end) : undefined,
   }));
 };
 

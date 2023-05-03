@@ -1,9 +1,4 @@
 export interface JiraProjectStatus {
-  //   self: string;
-  //   id: string;
-  //   name: string;
-  //   subtask: boolean;
-  //   statuses: {
   self: string;
   description: string;
   iconUrl: string;
@@ -18,5 +13,4 @@ export interface JiraProjectStatus {
     name: string;
   };
   scope: { type: string; project: { id: string } };
-  //   }[];
 }

@@ -72,7 +72,7 @@ export default function TrelloIntegration() {
                   color="success.main"
                   sx={{ ml: 10 }}
                 >
-                  Jira connected
+                  Trello connected
                 </Typography>
               </Box>
 
@@ -91,9 +91,11 @@ export default function TrelloIntegration() {
               </Button>
             </Box>
 
-            <Typography variant="body2" sx={{ my: 10 }}>
-              Connected email: {trelloIntegration.email}
-            </Typography>
+            {trelloIntegration.email && (
+              <Typography variant="body2" sx={{ my: 10 }}>
+                Connected email: {trelloIntegration.email}
+              </Typography>
+            )}
 
             {boards && (
               <TrelloBoardSelect
@@ -130,7 +132,7 @@ export default function TrelloIntegration() {
         <>
           <ConnectButton
             onClick={handleConnectTrello}
-            text="Connect Jira account"
+            text="Connect Trello account"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             size="large"

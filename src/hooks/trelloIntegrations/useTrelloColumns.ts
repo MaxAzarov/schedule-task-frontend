@@ -7,6 +7,7 @@ import {
   GetColumnsBoardsRequest,
   GetColumnsBoardsResponse,
 } from "src/api/trelloIntegration/getColumns/apiTypes";
+import { useNotify } from "src/components/SnackbarAlert";
 
 export function useTrelloColumns(
   params: GetColumnsBoardsRequest,
@@ -15,12 +16,17 @@ export function useTrelloColumns(
     "queryFn" | "queryKey"
   >
 ) {
+  const notify = useNotify();
   const { data, ...rest } = useQuery(
     cacheKeys.getColumns(),
     async () => {
       return await Api.getTrelloColumns(params);
     },
-    options
+    {
+      onError: () => {
+        notify("error", "Can not get user`s boards. Please reconnect");
+      },
+    }
   );
 
   return {
