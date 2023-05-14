@@ -1,6 +1,7 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Event } from "react-big-calendar";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import io from "socket.io-client";
 
 import { BigCalendar } from "src/components/BigCalendar";
 import { useIntegrationsEvents } from "src/hooks/integrations/useIntegrationsEvents";
@@ -10,6 +11,8 @@ import { CheckGreenCircleIcon } from "src/components/Icons";
 import "react-big-calendar/lib/sass/styles.scss";
 import { EventType } from "src/api/commonTypes";
 import { useCreateEvent } from "src/hooks/events/useCreateEvent";
+
+const socket = io("http://localhost:5000");
 
 function getEventDescription(event: Event): string {
   if (event.resource.type === EventType.jira) {
@@ -22,7 +25,7 @@ function getEventDescription(event: Event): string {
 }
 
 export function DashboardScreen() {
-  const { events } = useIntegrationsEvents({});
+  const { events, refetch: refechEvents } = useIntegrationsEvents({});
   const { mutate: markEventAsDone } = useMarkEventAsDone();
   const [selectedEvent, setSelectedEvent] = useState<Event | null>();
   const [newEvent, setNewEvent] = useState<Event>({});
@@ -42,6 +45,12 @@ export function DashboardScreen() {
     },
     [markEventAsDone]
   );
+
+  useEffect(() => {
+    socket.on("receiveMessage", (msg) => {
+      refechEvents();
+    });
+  }, [refechEvents]);
 
   const description = useMemo(() => {
     if (selectedEvent) return getEventDescription(selectedEvent);
