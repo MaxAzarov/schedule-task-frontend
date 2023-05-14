@@ -47,9 +47,13 @@ export function DashboardScreen() {
   );
 
   useEffect(() => {
-    socket.on("receiveMessage", (msg) => {
+    socket.on("refetchEvents", () => {
       refechEvents();
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, [refechEvents]);
 
   const description = useMemo(() => {
@@ -95,16 +99,6 @@ export function DashboardScreen() {
         onSelectSlot={handleSelectSlot}
         onSelectEvent={handleEventClick}
       />
-
-      <Box flexDirection="column" display="flex" sx={{ ml: 10 }}>
-        <Button variant="contained" sx={{ mb: "10px" }}>
-          Organize Current Day
-        </Button>
-
-        <Button variant="contained" sx={{ mb: "10px" }}>
-          Organize Current Week
-        </Button>
-      </Box>
 
       {selectedEvent && (
         <DialogStyled open={true} onClose={() => setSelectedEvent(null)}>

@@ -15,7 +15,7 @@ export const COLORS = {
   APP_BLUE_LIGHT: "#187CB3",
   APP_BLUE_DARK: "#195E95",
   APP_SECONDARY_MAIN: "#303E65",
-  APP_SECONDARY_LIGHT: "#D1E5F0", // charts, calendar,
+  APP_SECONDARY_LIGHT: "#D1E5F0",
   TEXT_PRIMARY: "#303E65",
   TEXT_SECONDARY: "#7583AA",
   TEXT_LIGHT_BLUE: "#096DA5",
@@ -53,7 +53,6 @@ export const SHADOWS = {
   TOP_BLOCK: "0px 10px 42px rgba(34, 60, 81, 0.07)",
 };
 
-// const theme = createTheme();
 const theme = createTheme({
   spacing: 2,
 

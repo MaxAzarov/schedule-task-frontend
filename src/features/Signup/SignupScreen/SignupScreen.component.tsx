@@ -67,6 +67,7 @@ export function SignupScreen() {
                 autoFocus
                 onChange={form.handleChange}
                 error={!!form.errors.firstName}
+                sx={{ mt: 10 }}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -79,6 +80,7 @@ export function SignupScreen() {
                 autoComplete="family-name"
                 onChange={form.handleChange}
                 error={!!form.errors.firstName}
+                sx={{ mt: 10 }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,6 +92,7 @@ export function SignupScreen() {
                 name="email"
                 autoComplete="email"
                 onChange={form.handleChange}
+                sx={{ mt: 10 }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -102,6 +105,7 @@ export function SignupScreen() {
                 id="password"
                 autoComplete="new-password"
                 onChange={form.handleChange}
+                sx={{ mt: 10 }}
               />
             </Grid>
           </Grid>

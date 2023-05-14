@@ -114,6 +114,7 @@ export function UserProfileScreen() {
                 form={form}
                 required
                 fullWidth
+                sx={{ mb: 10 }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -123,6 +124,7 @@ export function UserProfileScreen() {
                 form={form}
                 required
                 fullWidth
+                sx={{ mb: 10 }}
               />
             </Grid>
             <Grid item xs={12}>
