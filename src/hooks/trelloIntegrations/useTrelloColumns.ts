@@ -23,8 +23,9 @@ export function useTrelloColumns(
       return await Api.getTrelloColumns(params);
     },
     {
+      enabled: options?.enabled,
       onError: () => {
-        notify("error", "Can not get user`s boards. Please reconnect");
+        notify("error", "Can not get user`s columns. Please reconnect");
       },
     }
   );

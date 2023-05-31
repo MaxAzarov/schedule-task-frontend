@@ -12,11 +12,12 @@ import "react-big-calendar/lib/sass/styles.scss";
 import { EventType } from "src/api/commonTypes";
 import { useCreateEvent } from "src/hooks/events/useCreateEvent";
 
-const socket = io("http://localhost:5000");
-
 function getEventDescription(event: Event): string {
   if (event.resource.type === EventType.jira) {
-    return event.resource.description.content?.[0]?.content?.[0]?.text ?? "";
+    return (
+      event.resource?.fields?.description?.content?.[0]?.content?.[0]?.text ??
+      ""
+    );
   } else if (event.resource.type === EventType.trello) {
     return event.resource.desc;
   }
@@ -47,6 +48,22 @@ export function DashboardScreen() {
   );
 
   useEffect(() => {
+    const socket = io("http://localhost:5000");
+    console.log("adsfalkdsfjds;");
+
+    socket.on("connect", () => {
+      console.log("connect");
+    });
+
+    socket.on("error", () => {
+      console.log("error");
+    });
+
+    socket.onAny((eventName, ...args) => {
+      console.log("Received event:", eventName);
+      console.log("Arguments:", args);
+    });
+
     socket.on("refetchEvents", () => {
       refechEvents();
     });

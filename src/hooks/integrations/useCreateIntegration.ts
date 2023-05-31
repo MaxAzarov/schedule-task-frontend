@@ -29,7 +29,7 @@ export const useCreateIntegration = () => {
         notify("success", "New integration is added");
       },
       onError: (error) => {
-        notify("error", "Can not create a new integration");
+        // notify("error", "Can not create a new integration");
       },
     }
   );

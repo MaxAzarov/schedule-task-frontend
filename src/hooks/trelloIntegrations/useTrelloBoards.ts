@@ -21,6 +21,7 @@ export function useTrelloBoards(
       return await Api.getTrelloBoards(params);
     },
     {
+      enabled: options?.enabled,
       onError: () => {
         notify("error", "Can not get user`s boards. Please reconnect");
       },

@@ -17,13 +17,15 @@ export default function TrelloIntegration() {
     type: EventType.trello,
   });
 
-  const { boards } = useTrelloBoards({}, { enabled: !!trelloIntegration });
-  const { mutate: updateIntegration } = useUpdateIntegration();
   const { mutate: deleteIntegration, isLoading } = useDeleteIntegration();
+  const { mutate: updateIntegration } = useUpdateIntegration();
+
   const { columns } = useTrelloColumns(
     {},
     { enabled: !!trelloIntegration?.projectId }
   );
+
+  const { boards } = useTrelloBoards({}, { enabled: !!trelloIntegration });
 
   const handleConnectTrello = useCallback(async () => {
     window.location.href = await getTrelloRedirectUrl();
