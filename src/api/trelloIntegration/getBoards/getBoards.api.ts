@@ -10,7 +10,7 @@ export const getBoardsApi = async (
 ): Promise<GetTrellBoardsResponseApi> => {
   const config: AxiosRequestConfig = {
     method: "get",
-    url: `/trello/boards`,
+    url: `integrations/trello/boards`,
   };
 
   const { data } = await api.request<

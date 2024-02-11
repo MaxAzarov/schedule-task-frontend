@@ -5,7 +5,7 @@ import {
   Views,
   dateFnsLocalizer,
 } from "react-big-calendar";
-import format from "date-fns/format";
+import { format } from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
@@ -20,7 +20,7 @@ const localizer = dateFnsLocalizer({
 });
 
 const formats: Formats = {
-  timeGutterFormat: (date) => format(date, "HH:mm", { locale: enUS }),
+  timeGutterFormat: (date) => format(date, "HH:mm"),
 };
 
 export function BigCalendar({ ...props }: Omit<CalendarProps, "localizer">) {

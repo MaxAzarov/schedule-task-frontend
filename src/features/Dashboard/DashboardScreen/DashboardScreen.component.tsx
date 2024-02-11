@@ -49,7 +49,6 @@ export function DashboardScreen() {
 
   useEffect(() => {
     const socket = io("http://localhost:5000");
-    console.log("adsfalkdsfjds;");
 
     socket.on("connect", () => {
       console.log("connect");

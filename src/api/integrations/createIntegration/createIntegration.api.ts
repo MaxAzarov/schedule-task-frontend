@@ -14,7 +14,7 @@ export const createIntegrationApi = async (
     AxiosResponse<CreateIntegrationResponseApi>
   >({
     method: "post",
-    url: "integrations",
+    url: "integrations/",
     data: requestApi,
   });
 

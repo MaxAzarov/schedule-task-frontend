@@ -10,7 +10,7 @@ export const getBoardsApi = async (
 ): Promise<GetJiraBoardsResponseApi> => {
   const config: AxiosRequestConfig = {
     method: "get",
-    url: `/jira/boards`,
+    url: `integrations/jira/boards`,
   };
 
   const { data } = await api.request<

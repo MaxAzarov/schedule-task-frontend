@@ -40,7 +40,6 @@ export function UserProfileScreen() {
 
   useEffect(() => {
     // TODO: find other way to create integration
-
     async function create() {
       if (type && accessToken && refreshToken) {
         await createUserIntegration(

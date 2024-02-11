@@ -10,7 +10,7 @@ export const getColumnsApi = async (
 ): Promise<GetTrellColumnsResponseApi> => {
   const config: AxiosRequestConfig = {
     method: "get",
-    url: `/trello/board/list`,
+    url: `integrations/trello/board/list`,
   };
 
   const { data } = await api.request<

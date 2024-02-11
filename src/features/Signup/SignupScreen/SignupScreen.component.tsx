@@ -13,10 +13,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useFormik } from "formik";
 import signupSchema from "./Signup.schema";
 import { ROUTES } from "src/routing/routes";
-import { useCreateUser } from "src/hooks/users/useCreateUser";
+import { useSignup } from "src/hooks/auth/useSignup";
 
 export function SignupScreen() {
-  const { mutate: createUser } = useCreateUser();
+  const { mutate: signup } = useSignup();
+
   const form = useFormik({
     validationSchema: signupSchema,
     initialValues: {
@@ -26,7 +27,7 @@ export function SignupScreen() {
       lastName: "",
     },
     onSubmit: async (form) => {
-      await createUser({
+      await signup({
         email: form.email,
         firstName: form.firstName,
         lastName: form.lastName,

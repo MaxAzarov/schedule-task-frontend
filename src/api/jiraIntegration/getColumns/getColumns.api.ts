@@ -10,7 +10,7 @@ export const getColumnsApi = async (
 ): Promise<GetJiraColumnsResponseApi> => {
   const config: AxiosRequestConfig = {
     method: "get",
-    url: `/jira/project/statuses`,
+    url: `integrations/jira/project/statuses`,
   };
 
   const { data } = await api.request<

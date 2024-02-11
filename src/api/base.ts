@@ -30,7 +30,7 @@ export function createAxiosInstance({ baseURL, apiToken }: ApiConfig) {
   const instance = axios.create({
     headers: {
       Authorization: `Bearer ${apiToken}`,
-      ContentType: "application/json",
+      "Content-Type": "application/json",
     },
     baseURL,
   });
